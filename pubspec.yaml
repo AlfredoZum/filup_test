@@ -22,8 +22,10 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.2 #cupertino
+  dio: ^4.0.0
   flutter:
     sdk: flutter
+  flutter_screenutil: ^5.0.0+2
   flutter_svg: ^0.22.0
   rxdart: ^0.27.1
 

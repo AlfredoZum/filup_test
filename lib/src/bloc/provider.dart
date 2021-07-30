@@ -10,18 +10,18 @@ class Provider extends InheritedWidget {
     return _instancia ??= Provider._internal(key: key, child: child );
   }
 
-  const Provider._internal({ Key? key, required Widget child }) :
+  Provider._internal({ Key? key, required Widget child }) :
         super(key: key, child: child );
 
   static Provider? _instancia;
 
-  PokemonBloc? get pokemonBloc => null;
+  final PokemonBloc pokemonBloc = PokemonBloc();
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) => true;
 
-  static PokemonBloc? of ( BuildContext context ) {
-    return
-      ( context.dependOnInheritedWidgetOfExactType<Provider>() )!.pokemonBloc;
+  static PokemonBloc of ( BuildContext context ) {
+    return context.dependOnInheritedWidgetOfExactType<Provider>()!
+        .pokemonBloc;
   }
 }
