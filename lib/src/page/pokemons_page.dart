@@ -16,6 +16,16 @@ class _PokemonsPageState extends State<PokemonsPage> {
   PokemonBloc? pokemonBloc;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((Duration timestamp) {
+      final PokemonBloc pokemonBlocInit = Provider.of(context);
+      pokemonBlocInit.getPokemon();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
 
     pokemonBloc = Provider.of(context);
@@ -28,11 +38,16 @@ class _PokemonsPageState extends State<PokemonsPage> {
             maxHeight: MediaQuery.of(context).size.height),
         designSize: const Size(750, 1334));
 
-    // pokemonBloc!.getPokemon();
-
     return Scaffold(
       backgroundColor: const Color(0xfff8f9fa),
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+            color: Colors.white
+        ),
+        textTheme: Theme.of(context).textTheme.apply(
+          bodyColor: Colors.white,
+          displayColor: Colors.white,
+        ),
         title: const Text('List Pokemon'),
       ),
       body: SafeArea(

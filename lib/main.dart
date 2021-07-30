@@ -15,10 +15,11 @@ class MyApp extends StatelessWidget {
     return Provider(
       child: MaterialApp(
         title: 'Filup Test',
-        initialRoute: '/listPokemon',
+        initialRoute: '/calendarPage',
         routes: customRoutes,
         theme: ThemeData(
           primaryColor: const Color(0xff3cd458),
+          // primaryColor: Colors.deepPurple[600],
         ),
       ),
     );

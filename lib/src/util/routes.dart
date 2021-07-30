@@ -1,3 +1,4 @@
+import 'package:filup_test/src/page/calendar_page.dart';
 import 'package:flutter/material.dart';
 
 // Pages
@@ -9,4 +10,6 @@ final Map<String, WidgetBuilder> customRoutes = <String, WidgetBuilder>{
   '/': (BuildContext context) => HomePage(),
   '/listPokemon': (BuildContext context) => PokemonsPage(),
   '/pokemonDetail': (BuildContext context) => PokemonDetailPage(),
+  '/calendarPage': (BuildContext context) => CalendarPage(),
+
 };
