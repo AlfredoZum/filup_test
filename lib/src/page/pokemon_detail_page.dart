@@ -38,9 +38,6 @@ class PokemonDetailPage extends StatelessWidget {
               Center(
                 child: _cardPokemon(snapshot.data!),
               ),
-              Center(
-                child: _imagePokemon(snapshot.data!.image!),
-              ),
             ],
           );
         },
@@ -65,27 +62,37 @@ class PokemonDetailPage extends StatelessWidget {
     const _description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: SizeConfig.row20),
+      margin: EdgeInsets.symmetric(
+        horizontal: SizeConfig.row20,
+      ),
       width: double.infinity,
-      child: Card(
-        child: Padding(
-          padding: EdgeInsets.all(SizeConfig.row20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget> [
-              Text(pokemon.name, style: _style),
-              SizedBox(height: SizeConfig.row10),
-              TypePokemon( 26.sp, FontWeight.bold, Colors.black, pokemon ),
-              SizedBox(height: SizeConfig.row20),
-              _statistics(pokemon),
-              SizedBox(height: SizeConfig.row10),
-              Text(_description, style: _styleDescription),
-              SizedBox(height: SizeConfig.row20),
-              _stats( pokemon.stats! ),
-            ],
+      child: Stack(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.symmetric(vertical: SizeConfig.row20 * 5),
+            child: Card(
+              child: Padding(
+                padding: EdgeInsets.all(SizeConfig.row20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget> [
+                    Text(pokemon.name, style: _style),
+                    SizedBox(height: SizeConfig.row10),
+                    TypePokemon( 26.sp, FontWeight.bold, Colors.black, pokemon ),
+                    SizedBox(height: SizeConfig.row20),
+                    _statistics(pokemon),
+                    SizedBox(height: SizeConfig.row10),
+                    Text(_description, style: _styleDescription),
+                    SizedBox(height: SizeConfig.row20),
+                    _stats( pokemon.stats! ),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
+          _imagePokemon(pokemon.image.toString()),
+        ],
       ),
     );
   }
@@ -128,7 +135,7 @@ class PokemonDetailPage extends StatelessWidget {
         _statsDescription(stats[1] as Map<String, dynamic>),
         _statsDescription(stats[2] as Map<String, dynamic>),
         _statsDescription(stats[3] as Map<String, dynamic>),
-        // _statsDescription(stats[4] as Map<String, dynamic>),
+        _statsDescription(stats[4] as Map<String, dynamic>),
       ],
     );
   }
@@ -136,7 +143,11 @@ class PokemonDetailPage extends StatelessWidget {
   Widget _statsDescription(Map<String, dynamic> stat){
 
     final Map<String, dynamic> _stat = stat['stat'] as Map<String, dynamic>;
-    final double baseStat = (stat['base_stat'] as int).toDouble();
+    double baseStat = (stat['base_stat'] as int).toDouble();
+
+    if( baseStat > 100.0 ){
+      baseStat = 100.0;
+    }
 
     return Expanded(
       child: Column(
