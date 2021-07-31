@@ -91,7 +91,7 @@ class PokemonDetailPage extends StatelessWidget {
               ),
             ),
           ),
-          _imagePokemon(pokemon.image.toString()),
+          _imagePokemon(pokemon.image.toString(), pokemon.name),
         ],
       ),
     );
@@ -167,16 +167,23 @@ class PokemonDetailPage extends StatelessWidget {
     );
   }
 
-  Widget _imagePokemon(String image){
+  Widget _imagePokemon(String image, String name){
     return Positioned(
       right: 0.0,
       top: 0.0,
       child: SizedBox(
         width: 200.0,
-        child:  Image.network(
+        child: Hero(
+          tag: name,
+          child: Image.network(
+            image,
+            fit: BoxFit.cover,
+          ),
+        ),
+        /* child:  Image.network(
           image,
           fit: BoxFit.cover,
-        ),
+        ),*/
       ),
     );
   }

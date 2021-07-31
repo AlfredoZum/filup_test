@@ -26,6 +26,9 @@ class HomePage extends StatelessWidget {
         title: const Text('Filup Test'),
       ),
       drawer: DrawerCustomer(),
+      body: Center(
+        child: Text('Welcome', style: Theme.of(context).textTheme.headline3),
+      ),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:filup_test/src/component/type_pokemon.dart';
+import 'package:filup_test/src/page/pokemon_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:filup_test/src/bloc/provider.dart';
 import 'package:filup_test/src/model/pokemon_model.dart';
@@ -44,7 +45,30 @@ class ListPokemon extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         pokemonBloc!.setPokemon(pokemon);
-        Navigator.pushNamed(context, '/pokemonDetail' );
+        Navigator.of(context).push(
+          PageRouteBuilder(
+            transitionDuration: Duration(milliseconds: 500),
+            pageBuilder: (
+                BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation) {
+              return PokemonDetailPage();
+            },
+            transitionsBuilder: (
+                BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              return Align(
+                child: FadeTransition(
+                  opacity: animation,
+                  child: child,
+                ),
+              );
+            },
+          ),
+        );
+        // Navigator.pushNamed(context, '/pokemonDetail' );
       },
       child: Container(
         margin: EdgeInsets.symmetric(
@@ -88,10 +112,17 @@ class ListPokemon extends StatelessWidget {
       right: 0.0,
       child: SizedBox(
         width: 135.0,
-        child:  Image.network(
+        child: Hero(
+          tag: image,
+          child: Image.network(
+            image,
+            fit: BoxFit.cover,
+          ),
+        ),
+        /* child:  Image.network(
           image,
           fit: BoxFit.cover,
-        ),
+        ), */
       ),
     );
   }
