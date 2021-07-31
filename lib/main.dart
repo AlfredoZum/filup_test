@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return Provider(
       child: MaterialApp(
         title: 'Filup Test',
-        initialRoute: '/mapPage',
+        initialRoute: '/',
         routes: customRoutes,
         theme: ThemeData(
           primaryColor: const Color(0xff3cd458),

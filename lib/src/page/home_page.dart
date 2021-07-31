@@ -16,10 +16,16 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+            color: Colors.white
+        ),
+        textTheme: Theme.of(context).textTheme.apply(
+          bodyColor: Colors.white,
+          displayColor: Colors.white,
+        ),
         title: const Text('Filup Test'),
       ),
       drawer: DrawerCustomer(),
-      body: const Text('Hold'),
     );
   }
 }

@@ -11,9 +11,9 @@ class DrawerCustomer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           _drawerHeader(),
-          _options('Pokemon', '/pokemonPage'),
-          _options('Calendario', '/calendarPage'),
-          _options('Mapa', '/mapPage'),
+          _options(context, 'Pokemon', '/listPokemon'),
+          _options(context, 'Calendario', '/calendarPage'),
+          _options(context, 'Mapa', '/mapPage'),
         ],
       ),
     );
@@ -36,10 +36,10 @@ class DrawerCustomer extends StatelessWidget {
     );
   }
 
-  Widget _options(String name, String route){
+  Widget _options(BuildContext ctx, String name, String route){
     return ListTile(
       title: Text(name),
-      onTap: () => print(route),
+      onTap: () => Navigator.pushNamed(ctx, route),
     );
   }
 }
